@@ -10,14 +10,16 @@
         4. execute repeatedly (as if they are in loop)
 
 2. Combinational Logic Example 
-  1. Clock generator 
+    1. Clock generator 
   ```
   assign #10 CLK = ~CLK; 
 
   assign #5 C = A&& B; 
   assign #5 E = C || D;   
   ```
-  2. Array of AND Gates 
+  
+    2. Array of AND Gates 
+    
   ```
   assign C[3] = A[3] && B[3];
   assign C[2] = A[2] && B[2];
@@ -27,5 +29,7 @@
   //Instead of this, use 4-bit vectors 
   
   assign C = A & B;
-  
+ 
+ 
+ 
 
