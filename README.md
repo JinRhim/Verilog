@@ -78,6 +78,9 @@ endmodule
 ```
 
 
+
+
+
 ## Verilog Assignments 
 Continuous Assignment | Procedural Assignment (always @ begin)
 ------------- | -------------
@@ -188,7 +191,28 @@ output Cout;
 endmodule
 ```
 
+5. 4 by 1 Multiplexer in Conditional Operator 
+```
+assign F = E ? A : (D ? B : C); 
+```
+
+6. 4 by 1 Multiplexer in If-Else Always Block
+
+```
+always @(Sel or I0 or I1 or I2 or I3) 
+begin 
+	if  (Sel == 2'b00)      F = I0; 
+	else if  (Sel == 2'b00) F = I1; 
+	else if  (Sel == 2'b00) F = I2; 
+	else if  (Sel == 2'b00) F = I3; 
+end 	
+
+```
+
+
+
 ## Operators 
+
 Symbol | Operation Performed | Example 
 ------------- | ------------|-----------------
 '~' | Bitwise NOT | 0101 --> NOT --> 1010
@@ -216,15 +240,59 @@ Symbol  | Operation Performed | Example
 \^  | XOR |  ^(10101) = 1.
 \~\^  | XNOR | \~\^(10101) = 0. 
 
-Shift Operator 
+Shift Operator (Always 0)
 
 Symbol  | Operation Performed | Example 
 ------------- | ------------- | ----------
 \>\>  | Shift Right | 10X0>>1 --> 010X
 \<\<  | Shift Left | 1010<<2 --> 1000
 
+Arithmetic Shift (Sign Extension)
+
+Symbol  | Operation Performed | Explanation | Example
+------------- | ------------- | ---------- | --------------
+\>\>\>  | Arithmetic Right Shift | Fill the sign bit if number is signed | 10100>>>2 --> 11101
+\<\<\<  | Arithmetic Shift Left | Fill with zero | 10100<<<2 --> 10000
+
+Concatenation / Replication 
+
+\{\}  | \{\{\}\}
+------------- | -------------
+Merge  | Repeat {n{m}}
+
+### Delays in Verilog 
+
+Inertial Delay  | Transport Delay
+------------- | -------------
+Ignore minor, short pulses  | simply delays in input 
+assign #10 Z2 = X;  | Z1 <= #10 (X); 
+Ignores pulse shorter than #10 | DElays every signal by 10 
 
 
 
+## Registers 
+
+1. Register with Synchronous Clear / Load
+
+<img width="606" alt="image" src="https://user-images.githubusercontent.com/93160540/160451235-bc27865a-4815-4dae-bab1-ac7408790cc0.png">
+
+2. Left Shfit Register with Clear and Load
+
+<img width="604" alt="image" src="https://user-images.githubusercontent.com/93160540/160451290-2ba721ab-759b-459a-aba9-aef7336253fe.png">
+
+3. Synchronous Counter another way
+
+<img width="609" alt="image" src="https://user-images.githubusercontent.com/93160540/160451416-afb84c5e-ca09-4bd5-8c3f-93c16714f882.png">
+
+
+4. 74168 Fully Synchronous Counter Design 
+
+<img width="497" alt="image" src="https://user-images.githubusercontent.com/93160540/160451632-f41518de-16b3-4f4a-a56b-2c6076174e56.png">
+
+5. 8-bit Counter using 74168 Counter 
+
+<img width="463" alt="image" src="https://user-images.githubusercontent.com/93160540/160451748-5db3f4a5-f63d-40e8-aa84-a3c2fc862550.png">
+
+<img width="707" alt="image" src="https://user-images.githubusercontent.com/93160540/160451792-277e55be-348f-4bdd-80c4-57a0d7d6619c.png">
 
 
