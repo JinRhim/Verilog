@@ -79,35 +79,17 @@ endmodule
 
 
 ## Verilog Assignments 
-
-### Continuous Assignment 
-1. [assign] keyword for combinational logic circuits 
-
-### Procedural Assignment 
-1. Registers / Finite State Machines 
-    1. Initial Blocks - execute once at time zero 
-        ```
-        initial 
-            begin 
-                ........
-                ........
-            end 
-        ```
-    2. Always Blocks - execute over and over again 
-      ```
-      always @(sensitivity-list)
-        begin 
-            ............
-            sequential-statements: Top-down evaluation
-            ............
-        end 
-        
-        ```
-2. Example
-- Do not use **assign** 
-- Blocking Assignment 
+Continuous Assignment | Procedural Assignment (always @ begin)
+------------- | -------------
+[assign] keyword  | "=" or "<=". Initial / Always Block
+combinational logic circuits | Finite state machines 
+All line executed together | "=" top-down evaluation. Combination circuit
+All line executed together | "<=" simultaneous evaluation. Sequential Circuits
 
 
+
+
+- Blocking Assignment
 ```
 always @(A,B,D) 
 Begin 
@@ -130,6 +112,7 @@ Blocking Assignment | Non-Blocking Assignment
 First line must be evaluated before second line  | Same-time evaluation
 "="| "<="
 combination circuits | sequential circuits 
+C = A && B; | C <= A && B;
 
 
 ## Basic Components 
@@ -204,6 +187,41 @@ output Cout;
 	
 endmodule
 ```
+
+## Operators 
+Symbol | Operation Performed | Example 
+------------- | ------------|-----------------
+'~' | Bitwise NOT | 0101 --> NOT --> 1010
+'&' | Bitwise AND | 0101 & 1100 --> 0100 
+'\|' | Bitwise OR | 0101 \| 1100 --> 1101 
+'^' | Bitwise XOR | 0101 ^ 1100 --> 1001
+'\~\^' or '\^\~' | Bitwise XNOR | 
+
+Logical Operator 
+
+Symbol  | Operation Performed | Example 
+------------- | ------------- | -------------
+'!'  | NOT | !(3'b010 && 3'b000) = 1'b1
+'&&'  | AND | 3'b010 && 3'b000 = 1'b0 
+'\|\| '  | OR | 3'b010 \|\| 3'b000 = 1'b1
+
+Reduction Operator 
+
+Symbol  | Operation Performed | Example 
+------------- | ------------- | -------------
+\&  | AND | &(10101) = 0. &(011) = 0.
+\~\&  | NAND | ~&(10101) = 1. 
+\|  | OR | \|(10101) = 1. 
+\~\|  | NOR | \~\|(10101) = 0.
+\^  | XOR |  ^(10101) = 1.
+\~\^  | XNOR | \~\^(10101) = 0. 
+
+Shift Operator 
+
+Symbol  | Operation Performed | Example 
+------------- | ------------- | ----------
+\>\>  | Shift Right | 10X0>>1 --> 010X
+\<\<  | Shift Left | 1010<<2 --> 1000
 
 
 
