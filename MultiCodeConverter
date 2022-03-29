@@ -60,7 +60,9 @@ endmodule
 
 
 
+
 module multi_code_converter_control(B,S,Q); 
+
 input [2:0] B;   //button
 input [3:0] S;   //switches
 
@@ -70,14 +72,13 @@ output reg [20:0] Q;
 
 wire [6:0] Decoded_Result_hex;
 wire [6:0] Decoded_Result_decimal;
-wire [6:0] Decoded_Result_bcd;
 
 wire [3:0] S_Subtracted;
 
-S_Subtracted = S - 10 //this should be executed first
+assign S_Subtracted = S - 10; //this should be executed first
 
-Seven_Segment_Hex_Decoder(S, Decoded_Result_hex);
-Seven_Segment_Hex_Decoder(S_Subtracted, Decoded_Result_decimal);
+Seven_Segment_Hex_Decoder SSHD0(S, Decoded_Result_hex);
+Seven_Segment_Hex_Decoder SSHD1(S_Subtracted, Decoded_Result_decimal);
 
 
 
@@ -96,9 +97,8 @@ always @* begin
 		//Display 1 = num if > 9 
 		//Display 0 = num - 10
 		D2 <= 7'b1011110; 
-		if (s >= 10) begin
+		if (S >= 10) begin
 			D1 <= 7'b0000110;   //Display 1. 
-			S_Subtracted <= S - 10;
 			D0 <= Decoded_Result_decimal;
 		end
 		else begin
@@ -109,7 +109,7 @@ always @* begin
 	else if ( B == 3'b011)  begin    //this is for BCD. b00 ~ b09
 		D2 <=  7'b1111100;            //"b"
 		D1 <=  7'b0000000;            // OFF
-		if (s >= 9) 
+		if (S >= 9) 
 			begin                //if bigger than 9 display 9
 			D0 <= 7'b1101111;
 			end
@@ -133,7 +133,7 @@ Q[3:2:1:0] = A : B : C : D
 
 module Seven_Segment_Hex_Decoder(Q, S);
 input [3:0] Q;
-output [6:0] S;
+output reg [6:0] S;
 
 always @* begin 
 	if (Q == 4'b0000)
@@ -208,3 +208,4 @@ always @* begin
 
 end
 endmodule
+
