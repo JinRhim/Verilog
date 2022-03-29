@@ -50,10 +50,11 @@ input [2:0] B;
 input [3:0] S; 
 output wire [20:0] Q;
 
+wire [20:0] Q_final;
 
-multi_code_converter_control(B,S,Q);
+multi_code_converter_control MCCC(B,S,Q_final);
 
-assign Q = ~Q;    //Invert
+assign Q = ~Q_final;    //Invert
 
 endmodule
 
@@ -68,21 +69,21 @@ input [3:0] S;   //switches
 
 reg [6:0] D0, D1, D2; 
 
-output reg [20:0] Q;
+output [20:0] Q;
 
 wire [6:0] Decoded_Result_hex;
 wire [6:0] Decoded_Result_decimal;
 
 wire [3:0] S_Subtracted;
 
-assign S_Subtracted = S - 10; //this should be executed first
+assign S_Subtracted = S - 4'b1010; //this should be executed first
 
 Seven_Segment_Hex_Decoder SSHD0(S, Decoded_Result_hex);
 Seven_Segment_Hex_Decoder SSHD1(S_Subtracted, Decoded_Result_decimal);
 
+assign Q = {D2 , D1 , D0};
 
-
-always @* begin 
+always @(*) begin 
 
 	
 	if (B == 3'b110) begin //this is hex. H00 ~ H0F.
@@ -117,9 +118,14 @@ always @* begin
 			begin
 			D0 <= Decoded_Result_hex;
 			end	
-	end	
+			
+	end
+	else begin
+		D2 <=7'b0000000;
+		D1 <=7'b0000000; 
+		D0 <=7'b0000000;
+	end
 	
-	Q = {D2 , D1 , D0};
 end	
 endmodule
 
@@ -208,4 +214,5 @@ always @* begin
 
 end
 endmodule
+
 
