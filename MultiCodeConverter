@@ -1,0 +1,210 @@
+/*
+B[2:0] = selector button
+S[3:0] = input binary
+Q[9:0] = output to decoder 
+
+button 0 = hex
+button 1 = decimal 
+button 2 = BCD 
+
+Button 2 || Button 1 || Button 0 
+	1				1 				0		-> button 0 pressed
+	1				0				1		-> button 1 pressed 
+	0				1				1		-> button 2 presssed
+	
+	
+	        A
+	 ===============
+	|               |
+F  |               |   B
+	|               |
+	|      G        |
+	 ===============
+	|               |
+   |               |   C
+E	|               |
+	|               |
+	 ===============
+	         D
+	
+	Order = 7'b GFEDCBA 
+	H = 7'b1110110  HEX --> Button 0 
+	d = 7'b1011110  Decimal --> Button 1 
+	b = 7'b1111100  BCD  --> Button 2 
+	
+	
+	===        ===      ===
+  |   |      |   |    |   |
+	===        ===      ===
+  |   |      |   |    |   |
+	===        ===      ===
+	D2         D1       D0
+	
+	
+*/
+
+
+
+module MultiCodeConverter(B,S,Q);
+input [2:0] B;
+input [3:0] S; 
+output wire [20:0] Q;
+
+
+multi_code_converter_control(B,S,Q);
+
+assign Q = ~Q;    //Invert
+
+endmodule
+
+
+
+
+module multi_code_converter_control(B,S,Q); 
+input [2:0] B;   //button
+input [3:0] S;   //switches
+
+reg [6:0] D0, D1, D2; 
+
+output reg [20:0] Q;
+
+wire [6:0] Decoded_Result_hex;
+wire [6:0] Decoded_Result_decimal;
+wire [6:0] Decoded_Result_bcd;
+
+wire [3:0] S_Subtracted;
+
+S_Subtracted = S - 10 //this should be executed first
+
+Seven_Segment_Hex_Decoder(S, Decoded_Result_hex);
+Seven_Segment_Hex_Decoder(S_Subtracted, Decoded_Result_decimal);
+
+
+
+always @* begin 
+
+	
+	if (B == 3'b110) begin //this is hex. H00 ~ H0F.
+		D2 <= 7'b1110110;   //H
+		D1 <= 7'b0000000;   //OFF 
+		D0 <= Decoded_Result_hex;
+
+		end
+	
+	else if (B == 3'b101) begin //this is decimal.
+		//Display 2 = "d"          d01 ~ d15
+		//Display 1 = num if > 9 
+		//Display 0 = num - 10
+		D2 <= 7'b1011110; 
+		if (s >= 10) begin
+			D1 <= 7'b0000110;   //Display 1. 
+			S_Subtracted <= S - 10;
+			D0 <= Decoded_Result_decimal;
+		end
+		else begin
+			D1 <= 7'b0111111;   //Display 0
+			D0 <= Decoded_Result_hex;
+		end
+	end
+	else if ( B == 3'b011)  begin    //this is for BCD. b00 ~ b09
+		D2 <=  7'b1111100;            //"b"
+		D1 <=  7'b0000000;            // OFF
+		if (s >= 9) 
+			begin                //if bigger than 9 display 9
+			D0 <= 7'b1101111;
+			end
+		else 
+			begin
+			D0 <= Decoded_Result_hex;
+			end	
+	end	
+	
+	Q = {D2 , D1 , D0};
+end	
+endmodule
+
+
+/*
+Input: Q[3:0]
+Output: S[6:0]
+
+Q[3:2:1:0] = A : B : C : D 
+*/
+
+module Seven_Segment_Hex_Decoder(Q, S);
+input [3:0] Q;
+output [6:0] S;
+
+always @* begin 
+	if (Q == 4'b0000)
+		begin
+		S = 7'b0111111;  
+		end
+	else if (Q == 4'b0001)
+		begin
+		S = 7'b0000110;
+		end
+	else if (Q == 4'b0010)
+		begin
+		S = 7'b1011011;
+		end
+	else if (Q == 4'b0011)
+		begin
+		S = 7'b1001111;
+		end
+	else if (Q == 4'b0100)
+		begin
+		S = 7'b1100110;
+		end
+	else if (Q == 4'b0101)
+		begin
+		S = 7'b1101101;
+		end
+	else if (Q == 4'b0110)
+		begin
+		S = 7'b1111101;
+		end
+	else if (Q == 4'b0111)
+		begin
+		S = 7'b0000111;
+		end
+	else if (Q == 4'b1000)
+		begin
+		S = 7'b1111111;
+		end
+	else if (Q == 4'b1001)      //this is 9
+		begin
+		S = 7'b1101111;
+		end
+	else if (Q == 4'b1010)
+		begin
+		S = 7'b1110111;
+		end
+	else if (Q == 4'b1011)
+		begin
+		S = 7'b1111100;
+		end
+	else if (Q == 4'b1100)
+		begin
+		S = 7'b0111001;
+		end
+	else if (Q == 4'b1101)
+		begin
+		S = 7'b1011110;
+		end
+	else if (Q == 4'b1110)
+		begin
+		S = 7'b1111001;
+		end
+	else if (Q == 4'b1111)
+		begin
+		S = 7'b1110001;
+		end
+	else 
+		begin
+		$display("decoder error: Q=%d", Q);
+		end
+	
+
+end
+endmodule
