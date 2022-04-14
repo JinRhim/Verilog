@@ -1,0 +1,212 @@
+/*=====================================
+
+
+Jin Rhim
+922385903
+jrhim@sfsu.edu
+
+ENGR 378 Lab 5
+
+the score can be increments by 1 or 10 by INC1 or INC10. 
+
+Press reset for 5 times.
+
+
+======================================*/
+
+
+module scoreboard_controller (INC, INC10, RST, CLK, Decoded_Result_BCD1, Decoded_Result_BCD0 );
+
+input INC;
+input INC10;
+input RST;
+input CLK; 
+
+reg[3:0] BCD1;  //display 1 
+reg[3:0] BCD0;  //display 0
+
+reg[3:0] reset_counter;  
+reg [1:0] state;
+
+wire [6:0] Reg_BCD1; 
+wire [6:0] Reg_BCD0;
+
+output [6:0] Decoded_Result_BCD1; 
+output [6:0] Decoded_Result_BCD0;
+
+Seven_Segment_Hex_Decoder SSHD1(BCD1, Reg_BCD1);
+Seven_Segment_Hex_Decoder SSHD0(BCD0, Reg_BCD0);
+
+assign Decoded_Result_BCD1 = ~Reg_BCD1;
+assign Decoded_Result_BCD0 = ~Reg_BCD0;
+
+
+initial begin 
+	BCD1 = 4'b0000;
+	BCD0 = 4'b0000; 
+	reset_counter <= 0; 
+	state <= 0;
+end
+
+
+always @(posedge CLK) 
+begin 
+	case (state) 
+	0: 
+		begin 
+			BCD1 <= 4'b0000;
+			BCD0 <= 4'b0000; 
+			reset_counter <= 0; 
+			state <= 1; 
+		end 
+		
+	1: 
+		begin 
+		
+			if (RST == 1'b0)
+			begin 
+				if (reset_counter == 4) 
+				begin 
+				 state <= 0; 
+				end 
+				else  
+				begin 
+					reset_counter <= reset_counter+1; 
+				end
+			end
+			
+			
+			
+			
+			else if (INC == 1'b0 && INC10 == 1'b1) 
+			
+			begin 
+				reset_counter <= 0; 
+				if (BCD0 < 4'b1001)  //if first digit is less than 9 
+				
+				begin 
+					BCD0 <= BCD0 +1; 
+				end 
+				
+				else if (BCD0 == 4'b1001 && BCD1 < 4'b1001)
+				//if first digit is 9 && second digit less than 9
+				
+				begin 
+				BCD1 <= BCD1 + 1; 
+				BCD0 <= 4'b0000;
+				end
+				
+				else 
+				
+				begin 
+					BCD1 <= BCD1;
+					BCD0 <= BCD0;
+				end
+				
+			end 
+			
+			else if (INC == 1'b1 && INC10 == 1'b0) 
+			
+			begin 
+				reset_counter <= 0;
+				
+				if (BCD1 < 4'b1001) //if second digit is less than 9
+				begin 
+					BCD1 <= BCD1 + 1;
+				end 
+				
+				else if (BCD1 == 4'b1001) 
+				
+				begin 
+					BCD1 <= BCD1; 
+				end 
+			end
+			end
+	endcase	
+
+end
+
+endmodule
+
+
+module Seven_Segment_Hex_Decoder(Q, S);
+input [3:0] Q;
+output reg [6:0] S;
+
+always @* begin 
+	if (Q == 4'b0000)
+		begin
+		S = 7'b0111111;  
+		end
+	else if (Q == 4'b0001)
+		begin
+		S = 7'b0000110;
+		end
+	else if (Q == 4'b0010)
+		begin
+		S = 7'b1011011;
+		end
+	else if (Q == 4'b0011)
+		begin
+		S = 7'b1001111;
+		end
+	else if (Q == 4'b0100)
+		begin
+		S = 7'b1100110;
+		end
+	else if (Q == 4'b0101)
+		begin
+		S = 7'b1101101;
+		end
+	else if (Q == 4'b0110)
+		begin
+		S = 7'b1111101;
+		end
+	else if (Q == 4'b0111)
+		begin
+		S = 7'b0000111;
+		end
+	else if (Q == 4'b1000)
+		begin
+		S = 7'b1111111;
+		end
+	else if (Q == 4'b1001)      //this is 9
+		begin
+		S = 7'b1101111;
+		end
+	else if (Q == 4'b1010)
+		begin
+		S = 7'b1110111;
+		end
+	else if (Q == 4'b1011)
+		begin
+		S = 7'b1111100;
+		end
+	else if (Q == 4'b1100)
+		begin
+		S = 7'b0111001;
+		end
+	else if (Q == 4'b1101)
+		begin
+		S = 7'b1011110;
+		end
+	else if (Q == 4'b1110)
+		begin
+		S = 7'b1111001;
+		end
+	else if (Q == 4'b1111)
+		begin
+		S = 7'b1110001;
+		end
+	else 
+		begin
+		$display("decoder error: Q=%d", Q);
+		end
+	
+	
+end
+endmodule
+				
+				
+				
+			
