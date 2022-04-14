@@ -1,0 +1,15 @@
+C:/Users/Jin/Desktop/ENGR378/ModelSim/lightHDL.v {1 {vlog -work work -stats=none C:/Users/Jin/Desktop/ENGR378/ModelSim/lightHDL.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module t
+
+Top level modules:
+	t
+
+} {} {}} C:/Users/Jin/Desktop/ENGR378/light.v {1 {vlog -work work -stats=none C:/Users/Jin/Desktop/ENGR378/light.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module light
+
+Top level modules:
+	light
+
+} {} {}}

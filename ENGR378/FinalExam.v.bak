@@ -1,0 +1,11 @@
+module test(A,B)
+input [2:0] A;
+output B; 
+
+reg C;
+
+assign B = ~^A; 
+
+endmodule; 
+
+

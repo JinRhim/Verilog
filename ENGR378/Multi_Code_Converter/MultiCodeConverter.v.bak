@@ -1,0 +1,128 @@
+/*
+B[2:0] = selector button
+S[3:0] = input binary
+Q[9:0] = output to decoder 
+
+button 0 = hex
+button 1 = decimal 
+button 2 = BCD 
+*/
+
+module multi_code_converter_control(B,S,Q); 
+input B[2:0];
+input S[3:0]; 
+output Q[11:0];
+integer c;
+
+always @* begin 
+	
+	if (B == 0)  //this is hex
+		Q[3:0] = S[3:0];
+		Q[7:4] = 1'b0000;
+		Q[11:8] = 1'b0000;   //print h for left most display
+		
+	else if (B == 1)  //this is decimal
+		c = 0;
+		while (S[3:0] > 9) 
+			S[3:0] = S[3:0] - 10; 
+			c = c + 1; 
+		Q[3:0] = S[3:0];
+		Q[7:4] = c;
+		Q[11:8] = 1'b0001    //print d for left most display.
+	
+	else if ( B == 2) //this is for BCD 
+		if (s[3:0] > 9) 
+			s[3:0] = 1'b1001    //set S[3:0] as 9. 
+		Q[3:0] = s[3:0]; 
+		Q[7:4] = 1'b0000;
+		Q[11:8] = 1'b0011; 		//print b for left most display.  
+			
+	end 
+endmodule
+
+
+/*
+Input: Q[3:0]
+Output: S[6:0]
+
+Q[3:2:1:0] = A : B : C : D 
+*/
+
+module 7_segment_Hex_Decoder(Q, S);
+input Q[3:0];
+output S[6:0];
+
+always @* begin 
+	if (Q = 0)
+		S = 1'b1111110;
+	else if (Q = 1)
+		S = 1'b0110000;
+	else if (Q = 2)
+		S = 1'b1101101
+	else if (Q = 3)
+		S = 1'b1111001;
+	else if (Q = 4)
+		S = 1'b0110011;
+	else if (Q = 5)
+		S = 1'b1011011;
+	else if (Q = 6)
+		S = 1'b1011111;
+	else if (Q = 7)
+		S = 1'b1110000;
+	else if (Q = 8)
+		S = 1'b1111111;
+	else if (Q = 9)
+		S = 1'b1111011;
+	else if (Q = 10)
+		S = 1'b1110111;
+	else if (Q = 11)
+		S = 1'b0011111;
+	else if (Q = 12)
+		S = 1'b1001110;
+	else if (Q = 13)
+		S = 1'b0111101;
+	else if (Q = 14)
+		S = 1'b1001111;
+	else if (Q = 15)
+		S = 1'b1000111;
+	else 
+		$display("decoder error: Q=%d", Q);
+
+end
+endmodule
+
+
+
+module hbd_decoder(Q[3:0], S[6:0]) 
+	if (Q = 0) 
+		S = 1'b0010111; //print h
+	else if (Q = 1) 
+		S = 1'b0011111; //print b
+	else if (Q = 2) 
+		S = 1'b0111101; //print d 
+	else 
+		$display("hbd decoder error: Q=%d", Q);
+		S = 1'b0000000;  
+end 
+endmodule
+
+
+
+
+
+module Multi_code_converter_module(B,S,Q)
+input B[2:0];
+input S[3:0]; 
+output Q[20:0];
+
+wire Qint[11:0];
+
+always @* begin 
+
+multi_code_converter_control mcc1(B[2:0], S[3:0], Qint[11:0]);
+7_segment_Hex_Decoder hexDecode1(Qint[3:0], Q[6:0]);
+7_segment_Hex_Decoder hexDecode1(Qint[7:4], Q[13:7]);
+hbd_decoder hbd1(Qint[11:8],Q[20:13]);
+
+end
+endmodule

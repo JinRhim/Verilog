@@ -1,0 +1,97 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/Users/Jin/Desktop/ENGR378/ModelSim
+vArithmetic_Circuit
+Z0 !s110 1645498315
+!i10b 1
+!s100 dgP^M;VzeYXGeEcNJeiiD0
+Imi1_^zQVj;gmHbXgAVJ;H3
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dC:/Users/Jin/Desktop/ENGR378/lab2_ver2/simulation
+Z3 w1644961627
+Z4 8C:/Users/Jin/Desktop/ENGR378/lab2_ver2/lab2_ver2.v
+Z5 FC:/Users/Jin/Desktop/ENGR378/lab2_ver2/lab2_ver2.v
+L0 50
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1645498314.000000
+Z8 !s107 C:/Users/Jin/Desktop/ENGR378/lab2_ver2/lab2_ver2.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Jin/Desktop/ENGR378/lab2_ver2/lab2_ver2.v|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+n@arithmetic_@circuit
+vFullAdder
+R0
+!i10b 1
+!s100 04PXI>e>9lW2QiVjC:IN61
+IZMj6ZKQKfPTM1b=R]FS?<2
+R1
+R2
+R3
+R4
+R5
+L0 30
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@full@adder
+vMultiplexer4by1
+R0
+!i10b 1
+!s100 jX4oa7lRP96gZ1Eg:?zz:1
+IPfzgWRk]TW>0z`9Y4B<OQ3
+R1
+R2
+R3
+R4
+R5
+L0 13
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@multiplexer4by1
+vtop_tb
+R0
+!i10b 1
+!s100 c8e[G]d2BTTL5``X7YR1m3
+IkbSoY7l^4P9?f1_A3;f]K2
+R1
+R2
+w1644974664
+8C:/Users/Jin/Desktop/ENGR378/lab2_ver2/top_tb.v
+FC:/Users/Jin/Desktop/ENGR378/lab2_ver2/top_tb.v
+L0 19
+R6
+r1
+!s85 0
+31
+!s108 1645498315.000000
+!s107 C:/Users/Jin/Desktop/ENGR378/lab2_ver2/top_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|C:/Users/Jin/Desktop/ENGR378/lab2_ver2/top_tb.v|
+!i113 1
+R10
+R11
