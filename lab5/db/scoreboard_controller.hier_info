@@ -1,0 +1,204 @@
+|scoreboard_controller
+INC => INC.IN1
+INC10 => INC10.IN1
+RST => RST.IN1
+CLK => CLK.IN5
+Decoded_Result_BCD1[0] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD1[1] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD1[2] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD1[3] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD1[4] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD1[5] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD1[6] <= Seven_Segment_Hex_Decoder:SSHD1.port1
+Decoded_Result_BCD0[0] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+Decoded_Result_BCD0[1] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+Decoded_Result_BCD0[2] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+Decoded_Result_BCD0[3] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+Decoded_Result_BCD0[4] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+Decoded_Result_BCD0[5] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+Decoded_Result_BCD0[6] <= Seven_Segment_Hex_Decoder:SSHD0.port1
+
+
+|scoreboard_controller|Seven_Segment_Hex_Decoder:SSHD1
+Q[0] => Equal0.IN3
+Q[0] => Equal1.IN0
+Q[0] => Equal2.IN3
+Q[0] => Equal3.IN1
+Q[0] => Equal4.IN3
+Q[0] => Equal5.IN1
+Q[0] => Equal6.IN3
+Q[0] => Equal7.IN2
+Q[0] => Equal8.IN3
+Q[0] => Equal9.IN1
+Q[0] => Equal10.IN3
+Q[0] => Equal11.IN2
+Q[0] => Equal12.IN3
+Q[0] => Equal13.IN2
+Q[0] => Equal14.IN3
+Q[0] => Equal15.IN3
+Q[1] => Equal0.IN2
+Q[1] => Equal1.IN3
+Q[1] => Equal2.IN0
+Q[1] => Equal3.IN0
+Q[1] => Equal4.IN2
+Q[1] => Equal5.IN3
+Q[1] => Equal6.IN1
+Q[1] => Equal7.IN1
+Q[1] => Equal8.IN2
+Q[1] => Equal9.IN3
+Q[1] => Equal10.IN1
+Q[1] => Equal11.IN1
+Q[1] => Equal12.IN2
+Q[1] => Equal13.IN3
+Q[1] => Equal14.IN2
+Q[1] => Equal15.IN2
+Q[2] => Equal0.IN1
+Q[2] => Equal1.IN2
+Q[2] => Equal2.IN2
+Q[2] => Equal3.IN3
+Q[2] => Equal4.IN0
+Q[2] => Equal5.IN0
+Q[2] => Equal6.IN0
+Q[2] => Equal7.IN0
+Q[2] => Equal8.IN1
+Q[2] => Equal9.IN2
+Q[2] => Equal10.IN2
+Q[2] => Equal11.IN3
+Q[2] => Equal12.IN1
+Q[2] => Equal13.IN1
+Q[2] => Equal14.IN1
+Q[2] => Equal15.IN1
+Q[3] => Equal0.IN0
+Q[3] => Equal1.IN1
+Q[3] => Equal2.IN1
+Q[3] => Equal3.IN2
+Q[3] => Equal4.IN1
+Q[3] => Equal5.IN2
+Q[3] => Equal6.IN2
+Q[3] => Equal7.IN3
+Q[3] => Equal8.IN0
+Q[3] => Equal9.IN0
+Q[3] => Equal10.IN0
+Q[3] => Equal11.IN0
+Q[3] => Equal12.IN0
+Q[3] => Equal13.IN0
+Q[3] => Equal14.IN0
+Q[3] => Equal15.IN0
+S[0] <= S[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[1] <= S[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[2] <= S[2]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[3] <= S[3]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[4] <= S[4]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[5] <= S[5]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[6] <= S[6]$latch.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|scoreboard_controller|Seven_Segment_Hex_Decoder:SSHD0
+Q[0] => Equal0.IN3
+Q[0] => Equal1.IN0
+Q[0] => Equal2.IN3
+Q[0] => Equal3.IN1
+Q[0] => Equal4.IN3
+Q[0] => Equal5.IN1
+Q[0] => Equal6.IN3
+Q[0] => Equal7.IN2
+Q[0] => Equal8.IN3
+Q[0] => Equal9.IN1
+Q[0] => Equal10.IN3
+Q[0] => Equal11.IN2
+Q[0] => Equal12.IN3
+Q[0] => Equal13.IN2
+Q[0] => Equal14.IN3
+Q[0] => Equal15.IN3
+Q[1] => Equal0.IN2
+Q[1] => Equal1.IN3
+Q[1] => Equal2.IN0
+Q[1] => Equal3.IN0
+Q[1] => Equal4.IN2
+Q[1] => Equal5.IN3
+Q[1] => Equal6.IN1
+Q[1] => Equal7.IN1
+Q[1] => Equal8.IN2
+Q[1] => Equal9.IN3
+Q[1] => Equal10.IN1
+Q[1] => Equal11.IN1
+Q[1] => Equal12.IN2
+Q[1] => Equal13.IN3
+Q[1] => Equal14.IN2
+Q[1] => Equal15.IN2
+Q[2] => Equal0.IN1
+Q[2] => Equal1.IN2
+Q[2] => Equal2.IN2
+Q[2] => Equal3.IN3
+Q[2] => Equal4.IN0
+Q[2] => Equal5.IN0
+Q[2] => Equal6.IN0
+Q[2] => Equal7.IN0
+Q[2] => Equal8.IN1
+Q[2] => Equal9.IN2
+Q[2] => Equal10.IN2
+Q[2] => Equal11.IN3
+Q[2] => Equal12.IN1
+Q[2] => Equal13.IN1
+Q[2] => Equal14.IN1
+Q[2] => Equal15.IN1
+Q[3] => Equal0.IN0
+Q[3] => Equal1.IN1
+Q[3] => Equal2.IN1
+Q[3] => Equal3.IN2
+Q[3] => Equal4.IN1
+Q[3] => Equal5.IN2
+Q[3] => Equal6.IN2
+Q[3] => Equal7.IN3
+Q[3] => Equal8.IN0
+Q[3] => Equal9.IN0
+Q[3] => Equal10.IN0
+Q[3] => Equal11.IN0
+Q[3] => Equal12.IN0
+Q[3] => Equal13.IN0
+Q[3] => Equal14.IN0
+Q[3] => Equal15.IN0
+S[0] <= S[0]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[1] <= S[1]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[2] <= S[2]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[3] <= S[3]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[4] <= S[4]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[5] <= S[5]$latch.DB_MAX_OUTPUT_PORT_TYPE
+S[6] <= S[6]$latch.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|scoreboard_controller|Debouncer:D0
+CLK => debouncer[0].CLK
+CLK => debouncer[1].CLK
+Input => debouncer[0].DATAIN
+Result <= Result.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|scoreboard_controller|Debouncer:D1
+CLK => debouncer[0].CLK
+CLK => debouncer[1].CLK
+Input => debouncer[0].DATAIN
+Result <= Result.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|scoreboard_controller|Debouncer:D2
+CLK => debouncer[0].CLK
+CLK => debouncer[1].CLK
+Input => debouncer[0].DATAIN
+Result <= Result.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|scoreboard_controller|Pulser:P0
+CLK => pulse_generator[0].CLK
+CLK => pulse_generator[1].CLK
+Input => pulse_generator[0].DATAIN
+Result <= Result.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|scoreboard_controller|Pulser:P1
+CLK => pulse_generator[0].CLK
+CLK => pulse_generator[1].CLK
+Input => pulse_generator[0].DATAIN
+Result <= Result.DB_MAX_OUTPUT_PORT_TYPE
+
+

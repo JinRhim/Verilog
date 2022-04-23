@@ -1,0 +1,81 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "Decoded_Result_BCD1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[0]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[1]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[2]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[3]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[4]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[5]",
+					"strict" : false
+				},
+				{
+					"name" : "Decoded_Result_BCD0[6]",
+					"strict" : false
+				},
+				{
+					"name" : "CLK",
+					"strict" : false
+				},
+				{
+					"name" : "RST",
+					"strict" : false
+				},
+				{
+					"name" : "INC",
+					"strict" : false
+				},
+				{
+					"name" : "INC10",
+					"strict" : false
+				}
+			]
+		}
+	]
+}
